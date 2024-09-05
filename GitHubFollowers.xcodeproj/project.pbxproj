@@ -79,6 +79,7 @@
 				61F0F8B32C8A368E00737E59 /* Screens */,
 				61F0F8B52C8A36EF00737E59 /* Custom Views */,
 				61F0F8B72C8A388400737E59 /* Support */,
+				613F9B352C891565009A0EAB /* Info.plist */,
 			);
 			path = GitHubFollowers;
 			sourceTree = "<group>";
@@ -120,7 +121,6 @@
 				613F9B292C891563009A0EAB /* SceneDelegate.swift */,
 				613F9B302C891565009A0EAB /* Assets.xcassets */,
 				613F9B322C891565009A0EAB /* LaunchScreen.storyboard */,
-				613F9B352C891565009A0EAB /* Info.plist */,
 			);
 			path = Support;
 			sourceTree = "<group>";
