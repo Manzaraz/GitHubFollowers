@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct Follower: Codable {
+struct Follower: Codable, Hashable {
     var login: String
     var avatarUrl: String
-    
 }
 
 /**
@@ -32,5 +31,4 @@ struct Follower: Codable {
     "received_events_url": "https://api.github.com/users/crvillanus/received_events",
     "type": "User",
     "site_admin": false
- 
  */
