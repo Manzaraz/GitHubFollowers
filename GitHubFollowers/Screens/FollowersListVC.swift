@@ -20,13 +20,13 @@ class FollowersListVC: UIViewController {
             guard let followers = followers else {
                 self.presentGFAlertOnMainThread(
                     title: "Bad Stuff Happened",
-                    message: errorMessage!,
+                    message: errorMessage!.rawValue,
                     buttonTitle: "Ok")
                 return
             }
             
             print("Followers.count = \(followers.count)")
-            print(followers) 
+            print(followers)
             
         }
     }
