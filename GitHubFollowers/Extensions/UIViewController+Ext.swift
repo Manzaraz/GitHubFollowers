@@ -1,9 +1,11 @@
 //
-//  UIViewController.swift
+//  UIViewController+Ext.swift
 //  GitHubFollowers
 //
-//  Created by Christian Manzaraz on 05/09/2024.
+//  Created by Christian Manzaraz on 07/09/2024.
 //
+
+import Foundation
 
 import UIKit
 
@@ -46,7 +48,7 @@ extension UIViewController {
     func dismissLoadingView() {
         DispatchQueue.main.async {
             containerView.removeFromSuperview()
-            containerView = nil            
+            containerView = nil
         }
     }
     
@@ -58,5 +60,6 @@ extension UIViewController {
     }
     
 }
+
 
 
