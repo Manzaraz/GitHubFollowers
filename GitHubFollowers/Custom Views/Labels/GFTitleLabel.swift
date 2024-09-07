@@ -26,13 +26,12 @@ class GFTitleLabel: UILabel {
         configure()
     }
     
-    private func configure() {
-        textColor                                   = .label
-        adjustsFontSizeToFitWidth                   = true
-        minimumScaleFactor                          = 0.90
-        lineBreakMode                               = .byTruncatingTail
-        translatesAutoresizingMaskIntoConstraints   = false
-        
-    }
     
+    private func configure() {
+        textColor                   = .label
+        adjustsFontSizeToFitWidth   = true
+        minimumScaleFactor          = 0.9
+        lineBreakMode               = .byTruncatingTail
+        translatesAutoresizingMaskIntoConstraints = false
+    }
 }
