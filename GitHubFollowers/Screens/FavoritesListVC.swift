@@ -40,7 +40,8 @@ class FavoritesListVC: UIViewController {
         tableView.delegate      = self
         tableView.dataSource    = self
         
-        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
+        tableView.register(FavoriteCell.self, 
+                           forCellReuseIdentifier: FavoriteCell.reuseID)
     }
     
     
@@ -61,7 +62,9 @@ class FavoritesListVC: UIViewController {
                 }
                 
             case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+                self.presentGFAlertOnMainThread(title: "Something went wrong", 
+                                                message: error.rawValue,
+                                                buttonTitle: "Ok")
             }
         }
     }
@@ -83,9 +86,7 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite    = favorites[indexPath.row]
-        let destVC      = FollowerListVC()
-        destVC.username = favorite.login
-        destVC.title    = favorite.login
+        let destVC      = FollowerListVC(username: favorite.login) 
         
         navigationController?.pushViewController(destVC, animated: true)
     }
@@ -101,7 +102,9 @@ extension FavoritesListVC: UITableViewDataSource, UITableViewDelegate {
             guard let self = self else { return }
             guard let error = error else { return }
             
-            self.presentGFAlertOnMainThread(title: "Unable to remove", message: error.rawValue, buttonTitle: "Ok")           
+            self.presentGFAlertOnMainThread(title: "Unable to remove", 
+                                            message: error.rawValue,
+                                            buttonTitle: "Ok")
         }
     }
 }

@@ -60,7 +60,7 @@ class GFItemInfoView: UIView {
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {
             case .repos:
-                symbolImageView.image   = UIImage(systemName: SFSymbols.repo)
+                symbolImageView.image   = UIImage(systemName: SFSymbols.repos)
                 titleLabel.text         = "Public Repos"
             
             case .gists:
