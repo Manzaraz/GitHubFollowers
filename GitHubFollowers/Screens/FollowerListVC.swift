@@ -1,5 +1,5 @@
 //
-//  FollowersListVC.swift
+//  FollowerListVC.swift
 //  GitHubFollowers
 //
 //  Created by Christian Manzaraz on 04/09/2024.
@@ -11,7 +11,7 @@ protocol FollowerListVCDelegate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
-class FollowersListVC: UIViewController {
+class FollowerListVC: UIViewController {
     
     enum Section { case main }
     
@@ -150,7 +150,7 @@ class FollowersListVC: UIViewController {
 }
 
 
-extension FollowersListVC: UICollectionViewDelegate {
+extension FollowerListVC: UICollectionViewDelegate {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offsetY         = scrollView.contentOffset.y
@@ -177,7 +177,7 @@ extension FollowersListVC: UICollectionViewDelegate {
     }
 }
 
-extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
+extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         guard 
             let filter = searchController.searchBar.text,
@@ -198,7 +198,7 @@ extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
 }
 
 
-extension FollowersListVC: FollowerListVCDelegate {
+extension FollowerListVC: FollowerListVCDelegate {
     func didRequestFollowers(for username: String) {
         self.username   = username
         title           = username
