@@ -10,6 +10,7 @@ import UIKit
 class FavoriteCell: UITableViewCell {
 
     static let reuseID  = "FavoriteCell"
+    
     let avatarImageView = GFAvatarImageView(frame: .zero)
     let usernameLabel   = GFTitleLabel(textAlignment: .left, fontSize: 26)
 
@@ -44,13 +45,7 @@ class FavoriteCell: UITableViewCell {
     
     
     func set(favorite: Follower) {
+        avatarImageView.downloadAvatar(fromURL: favorite.avatarUrl)
         usernameLabel.text = favorite.login
-        
-        NetworkManager.shared.downloadImage(from: favorite.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async { self.avatarImageView.image  = image }
-        }
     }
-
 }

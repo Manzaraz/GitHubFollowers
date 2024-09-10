@@ -29,11 +29,11 @@ class GFItemInfoVC: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }    
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureBackgroundView()
         layerUI()
         configureStackView()
@@ -62,7 +62,7 @@ class GFItemInfoVC: UIViewController {
     
     
     @objc func actionButtonTapped() {}
-
+    
     
     private func layerUI() {
         view.addSubViews(stackView, actionButton)
@@ -83,6 +83,4 @@ class GFItemInfoVC: UIViewController {
             actionButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
-    
-
 }

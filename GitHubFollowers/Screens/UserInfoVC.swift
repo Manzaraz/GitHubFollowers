@@ -11,6 +11,7 @@ protocol UserInfoVCDelegate: AnyObject {
     func didRequestFollowers(for username: String)
 }
 
+
 class UserInfoVC: GFDataLoadingVC {
     
     let scrollView          = UIScrollView()
@@ -27,6 +28,7 @@ class UserInfoVC: GFDataLoadingVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureViewController()
         configureScrollView()
         layoutUI()
@@ -35,7 +37,7 @@ class UserInfoVC: GFDataLoadingVC {
     
     
     func configureViewController() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor    = .systemBackground
         let doneButton          = UIBarButtonItem(barButtonSystemItem: .done,
                                                   target: self,
                                                   action: #selector(dismissVC))
@@ -62,9 +64,7 @@ class UserInfoVC: GFDataLoadingVC {
             
             switch result {
             case .success(let user):
-                DispatchQueue.main.async {
-                    self.configureUIElements(with: user)
-                }
+                DispatchQueue.main.async { self.configureUIElements(with: user) }
                 
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Something went wrong", 
@@ -126,8 +126,6 @@ class UserInfoVC: GFDataLoadingVC {
     @objc func dismissVC() {
         dismiss(animated: true)
     }
-    
-    
 }
 
 extension UserInfoVC: GFRepoItemVCDelegate {
@@ -140,8 +138,6 @@ extension UserInfoVC: GFRepoItemVCDelegate {
         
         presentSafariVC(with: url)
     }
-    
-    
 }
 
 extension UserInfoVC: GFFollowerItemVCDelegate {

@@ -8,7 +8,7 @@
 import UIKit
 
 class GFUserInfoHeaderVC: UIViewController {
-
+    
     let avatarImageView     = GFAvatarImageView(frame: .zero)
     let usernameLabel       = GFTitleLabel(textAlignment: .left, fontSize: 34)
     let nameLabel           = GFSecondaryTitleLabel(fontSize: 18)
@@ -29,35 +29,25 @@ class GFUserInfoHeaderVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addSubViews()
+        
+        view.addSubViews(avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel)
         layoutUI()
         configureUIElements()
     }
     
     
     func configureUIElements() {
-        downloadAvatarManager()        
-        usernameLabel.text          = user.login
-        nameLabel.text              = user.name ?? ""
-        locationLabel.text          = user.location ?? "No Location"
-        bioLabel.text               = user.bio ?? "No bio available."
-        bioLabel.numberOfLines      = 3
-            
-        locationImageView.image     = SFSymbols.location
-        locationImageView.tintColor = .secondaryLabel
+        avatarImageView.downloadAvatar(fromURL: user.avatarUrl)
+        usernameLabel.text              = user.login
+        nameLabel.text                  = user.name ?? ""
+        locationLabel.text              = user.location ?? "No Location"
+        bioLabel.text                   = user.bio ?? "No bio available."
+        bioLabel.numberOfLines          = 3
+
+        locationImageView.image         = SFSymbols.location
+        locationImageView.tintColor     = .secondaryLabel
     }
     
-    func downloadAvatarManager() {
-        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.avatarImageView.image  = image }
-        }
-    }
-    
-    func addSubViews() {
-        view.addSubViews(avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel)
-    }
     
     func layoutUI() {
         let padding: CGFloat            = 20
@@ -95,7 +85,5 @@ class GFUserInfoHeaderVC: UIViewController {
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bioLabel.heightAnchor.constraint(equalToConstant: 90)
         ])
-        
     }
-    
 }

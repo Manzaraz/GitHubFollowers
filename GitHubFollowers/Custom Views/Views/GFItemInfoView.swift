@@ -11,15 +11,16 @@ enum ItemInfoType {
     case repos, gists, followers, following
 }
 
-class GFItemInfoView: UIView {
 
+class GFItemInfoView: UIView {
+    
     let symbolImageView = UIImageView()
     let titleLabel      = GFTitleLabel(textAlignment: .left, fontSize: 14)
     let countLabel      = GFTitleLabel(textAlignment: .center, fontSize: 14)
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         configure()
     }
     
@@ -28,7 +29,7 @@ class GFItemInfoView: UIView {
     }
     
     
-    private func configure() {        
+    private func configure() {
         addSubViews(symbolImageView, titleLabel, countLabel)
         
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,22 +57,21 @@ class GFItemInfoView: UIView {
     
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {
-            case .repos:
-                symbolImageView.image   = SFSymbols.repos
-                titleLabel.text         = "Public Repos"
+        case .repos:
+            symbolImageView.image   = SFSymbols.repos
+            titleLabel.text         = "Public Repos"
             
-            case .gists:
-                symbolImageView.image   = SFSymbols.gists
-                titleLabel.text         = "Public Gists"
-                
-            case .followers:
-                symbolImageView.image   = SFSymbols.followers
-                titleLabel.text         = "Followers"
-                
-            case .following:
-                symbolImageView.image   = SFSymbols.following
-                titleLabel.text         = "Following"
+        case .gists:
+            symbolImageView.image   = SFSymbols.gists
+            titleLabel.text         = "Public Gists"
             
+        case .followers:
+            symbolImageView.image   = SFSymbols.followers
+            titleLabel.text         = "Followers"
+            
+        case .following:
+            symbolImageView.image   = SFSymbols.following
+            titleLabel.text         = "Following"
         }
         countLabel.text         = String(count)
     }

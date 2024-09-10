@@ -8,7 +8,7 @@
 import UIKit
 
 class GFTextField: UITextField {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -21,10 +21,11 @@ class GFTextField: UITextField {
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false // Don't forget of this line
+        
         layer.cornerRadius          = 10
         layer.borderWidth           = 2
         layer.borderColor           = UIColor.systemGray4.cgColor
-        
+
         textColor                   = .label
         tintColor                   = .label
         textAlignment               = .center
@@ -34,10 +35,8 @@ class GFTextField: UITextField {
         
         backgroundColor             = .tertiarySystemBackground
         autocorrectionType          = .no
-        returnKeyType               = .go	
+        returnKeyType               = .go
         clearButtonMode             = .whileEditing
         placeholder                 = "Enter a username."
     }
- 
-    
 }
