@@ -81,10 +81,12 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     
+    
     func getFollowers(username: String, page: Int) {
         showLoadingView()
         isLoadingMoreFollowers = true
         
+       /*
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
             self.dismissLoadingView()
@@ -100,6 +102,33 @@ class FollowerListVC: GFDataLoadingVC {
             }
             
             self.isLoadingMoreFollowers = false
+        }
+        */
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                updateUI(with: followers)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Bad Stuff Happened",
+                                   message: gfError.rawValue,
+                                   buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
+            }
+            /*
+            guard let followers = try? await NetworkManager.shared.getFollowers(for: username, page: page) else {
+                presentDefaultError()
+                dismissLoadingView()
+                return
+            }
+            
+            updateUI(with: followers)
+            dismissLoadingView()
+            */
         }
     }
     
