@@ -111,9 +111,9 @@ class FollowerListVC: GFDataLoadingVC {
                 dismissLoadingView()
                 isLoadingMoreFollowers = false
             } catch {
-                if let error as? GFError {
+                if let gfError = error as? GFError {
                     presentGFAlert(title: "Bad Stuff Happened",
-                                   message: error.rawValue,
+                                   message: gfError.rawValue,
                                    buttonTitle: "Ok")
                 } else {
                     presentDefaultError()
