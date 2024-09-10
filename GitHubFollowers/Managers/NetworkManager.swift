@@ -58,8 +58,6 @@ class NetworkManager {
         task.resume() // don't forget because the request will not working
     }
     */
-    
-    
     func getFollowers(for username: String, page: Int) async throws -> [Follower] {
         let endpoint    = baseURL + "/users/\(username)/followers?per_page=100&page=\(page)"
         
@@ -81,7 +79,7 @@ class NetworkManager {
     }
     
     
-    
+    /*
     func getUserInfo(for username: String, completed: @escaping (Result<User, GFError>) -> Void) {
         let endpoint    = baseURL + "/users/\(username)"
         
@@ -119,8 +117,27 @@ class NetworkManager {
         
         task.resume() // don't forget because the request will not working
     }
+    */
+    func getUserInfo(for username: String) async throws -> User {
+        let endpoint            = baseURL + "/users/\(username)"
+        
+        guard let url = URL(string: endpoint) else { throw GFError.invalidUsername }
+        
+        let (data, response)    = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, 
+                response.statusCode == 200
+        else { throw GFError.invalidResponse }
+        
+        do {
+            return try decoder.decode(User.self, from: data)
+        } catch {
+            throw GFError.invalidData
+        }
+    }
     
     
+    /*
     func downloadImage(from urlString: String, completed: @escaping(UIImage?) -> Void) {
         let cacheKey = NSString(string: urlString)
         
@@ -146,10 +163,26 @@ class NetworkManager {
                 return
             }
             
-            self.cache.setObject(image, forKey: cacheKey)            
+            self.cache.setObject(image, forKey: cacheKey)
             completed(image)
         }
         
         task.resume()
+    }
+    */
+    func downloadImage(from urlString: String) async -> UIImage? {
+        let cacheKey = NSString(string: urlString)
+        
+        if let image = cache.object(forKey: cacheKey) { return image }
+        guard let url = URL(string: urlString) else { return nil }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            guard let image = UIImage(data: data) else { return nil }
+            cache.setObject(image, forKey: cacheKey)
+            return image
+        } catch {
+            return nil
+        }
     }
 }

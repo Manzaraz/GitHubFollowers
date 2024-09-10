@@ -109,6 +109,7 @@ class FollowerListVC: GFDataLoadingVC {
                 let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
                 updateUI(with: followers)
                 dismissLoadingView()
+                isLoadingMoreFollowers = false
             } catch {
                 if let gfError = error as? GFError {
                     presentGFAlert(title: "Bad Stuff Happened",
@@ -117,6 +118,8 @@ class FollowerListVC: GFDataLoadingVC {
                 } else {
                     presentDefaultError()
                 }
+                
+                isLoadingMoreFollowers = false
                 dismissLoadingView()
             }
             /*
@@ -165,6 +168,7 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     
+    /*
     @objc func addButtonTapped() {
         showLoadingView()
         
@@ -181,6 +185,25 @@ class FollowerListVC: GFDataLoadingVC {
             }
         }
     }
+    */
+    @objc func addButtonTapped() {
+        showLoadingView()
+        
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
+                addUserToFavorites(with: user)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Something Went Wrong", message: gfError.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
+                dismissLoadingView()
+            }
+        }
+    }
     
     
     func addUserToFavorites(with user: User) {
@@ -189,11 +212,15 @@ class FollowerListVC: GFDataLoadingVC {
         PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
             guard let self  = self else { return }
             guard let error = error else {
-                self.presentGFAlertOnMainThread(title: "Success!", message: "You have successful favorited this user.🤩", buttonTitle: "Hooray")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(title: "Success!", message: "You have successful favorited this user.🤩", buttonTitle: "Hooray")
+                }
                 return
             }
             
-            self.presentGFAlertOnMainThread(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            DispatchQueue.main.async {
+                self.presentGFAlert(title: "Something went wrong", message: error.rawValue, buttonTitle: "Ok")
+            }
         }
     }
 }
