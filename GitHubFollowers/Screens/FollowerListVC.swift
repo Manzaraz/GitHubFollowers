@@ -111,9 +111,9 @@ class FollowerListVC: GFDataLoadingVC {
                 dismissLoadingView()
                 isLoadingMoreFollowers = false
             } catch {
-                if let gfError = error as? GFError {
+                if let error as? GFError {
                     presentGFAlert(title: "Bad Stuff Happened",
-                                   message: gfError.rawValue,
+                                   message: error.rawValue,
                                    buttonTitle: "Ok")
                 } else {
                     presentDefaultError()
@@ -210,8 +210,8 @@ class FollowerListVC: GFDataLoadingVC {
         let favorite        = Follower(login: user.login, avatarUrl: user.avatarUrl)
         
         PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-            guard let self  = self else { return }
-            guard let error = error else {
+            guard let self else { return }
+            guard let error else {
                 DispatchQueue.main.async {
                     self.presentGFAlert(title: "Success!", message: "You have successful favorited this user.🤩", buttonTitle: "Hooray")
                 }
