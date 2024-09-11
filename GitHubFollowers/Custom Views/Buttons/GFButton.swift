@@ -26,7 +26,7 @@ class GFButton: UIButton {
     
     private func configure() {
         configuration               = .tinted()
-        configuration?.cornerStyle  = .capsule
+        configuration?.cornerStyle  = .medium
         translatesAutoresizingMaskIntoConstraints = false // it's important to have this line
     }
     
@@ -37,12 +37,11 @@ class GFButton: UIButton {
         configuration?.title                = title
         
         configuration?.image                = UIImage(systemName: systemImageName)
-        configuration?.imagePadding         = 6
+        configuration?.imagePadding         = 8
         configuration?.imagePlacement       = .leading
     }
 }
 
 #Preview {
-    let button = GFButton(backgroundColor: .red, titile: "Set Date", systemImageName: "calendar")
-    return button
+    GFButton(backgroundColor: .blue, titile: "Set Date", systemImageName: "calendar")
 }
