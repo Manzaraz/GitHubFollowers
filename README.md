@@ -5,7 +5,7 @@ In the main interface, you can search for a user, which will take you to a Follo
 In the Tab bar, you will find access to the Favorites screen, where you can view all the people you have added to your favorites list. If at any point you wish to remove someone from this list, simply swipe left on the cell, and you're done.
 I hope you enjoy the project as much as I enjoyed creating it. Thank you for your interest!
 
-[GitHub Demo](/ghDemo.gif)
+![GitHub Demo](/ghDemo.gif)
 
 ## This is the timeline of my commits in the project:
 
